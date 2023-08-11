@@ -1,29 +1,31 @@
 package programmers.p42626;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.PriorityQueue;
 
 public class Solution {
     public static int solution(int[] scoville, int K) {
     	int answer = 0;
-    	ArrayList<Integer> sList = new ArrayList<Integer>();
-    	Arrays.sort(scoville);
+    	PriorityQueue<Integer> pq = new PriorityQueue<>();
     	for (int i: scoville) {
-			sList.add(i);
+			pq.add(i);
 		}
     	
     	while(true) {
-    		for (Integer i : sList) {
-			}
-    		if(sList.get(0) >= K) break;
-    		
-    		int a = sList.remove(0);
-    		int b = sList.remove(1);
+    		if(pq.size() == 1) {
+    			if(pq.poll() < 7) return -1;
+    			else return answer;
+    		}
+    		int a = pq.poll();
+    		if(a >= K) break;
+    		int b = pq.poll();
     		int c = a + b*2;
-    		sList.add(0, c);
+    		if(pq.size() == 0) {
+    			if(c < K) return -1;
+    			else return answer+1;
+    		}
+    		pq.add(c);
     		answer++;
     	}
-    	
         return answer;
     }
     
