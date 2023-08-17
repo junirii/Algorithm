@@ -1,41 +1,19 @@
 package programmers.p42885;
 
-import java.util.Collections;
-import java.util.PriorityQueue;
+import java.util.Arrays;
 
 public class Solution {
 	public static int solution(int[] people, int limit) {
 		int answer = 0;
-		PriorityQueue<Integer> q = new PriorityQueue<Integer>(Collections.reverseOrder());
-		for (int i : people) {
-			q.add(i);
-		}
-		int sum = 0;
-		int cnt = 0;
-		while(true) {
-			if(q.isEmpty()) break;
-			PriorityQueue<Integer> q_temp = new PriorityQueue<Integer>(Collections.reverseOrder());
-			int size = q.size();
-			for (int i = 0; i < size; i++) {
-				int num = q.poll();
-				if(cnt == 2) {
-					q_temp.add(num);
-					continue;
-				}else {
-					if(sum + num <= limit) {
-						sum += num;
-						cnt++;
-					}else {
-						q_temp.add(num);
-					}
-				}
+		int idx = 0;
+		Arrays.sort(people);
+		for (int i = people.length-1; i >= 0 ; i--) {
+			if(idx > i) break;
+			if(people[i] + people[idx] <= limit) {
+				idx++;
 			}
- 			q = q_temp;
 			answer++;
-			sum = 0;
-			cnt = 0;
 		}
-		
         return answer;
     }
 	
