@@ -1,4 +1,4 @@
-package sft.s6288;
+package sof.s6288;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;

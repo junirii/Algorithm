@@ -1,4 +1,4 @@
-package sft.s6270;
+package sof.s6270;
 
 import java.util.Scanner;
 
